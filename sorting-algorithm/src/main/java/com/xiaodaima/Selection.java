@@ -8,22 +8,39 @@ package com.xiaodaima;
 public class Selection extends AbstractSort implements Sortable {
 
     @Override
+    /**
+     * 优化选择排序方法，减少交换次数。
+     * @param s
+     */
     public void sort(int[] s) {
         for(int i=0; i<s.length - 1; i++) {
             int minIndex = i;
-            int min = s[i];
             for(int j=i+1; j<s.length; j++) {
-                if(min > s[j]) {
-                    min = s[j];
+                if(s[minIndex] > s[j]) {
                     minIndex = j;
                 }
             }
             if(minIndex != i) {
-                s[minIndex] = s[i];
-                s[i] = min;
+                swap(s, minIndex, i);
             }
         }
     }
+
+    /**
+     * 传统选择排序方法
+     * @param s
+     */
+    public void sort2(int[] s) {
+        for(int i=0; i<s.length - 1; i++) {
+            for(int j=i+1; j<s.length; j++) {
+                if(s[i] > s[j]) {
+                    swap(s, i, j);
+                }
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) {
         new Selection().testSort();

@@ -1,7 +1,5 @@
 package com.xiaodaima;
 
-import java.util.Arrays;
-
 /**
  * 冒泡排序，最基本的冒泡排序，大数值在右边，小数字在左边
  * Example: 1 5 6 8 9 11 12
@@ -18,7 +16,7 @@ public class Bubble extends AbstractSort implements Sortable {
     public void sort(int[] s) {
         for (int i = 0; i < s.length - 1; i++) {
             for (int j = 1; j < s.length - i; j++) {
-                swap(s, j - 1, j);
+                prevGtNextThenSwap(s, j - 1, j);
             }
         }
     }
@@ -26,22 +24,14 @@ public class Bubble extends AbstractSort implements Sortable {
 
     public void sort2(int[] s) {
         for (int i = 0; i < s.length - 1; i++) {
-            for (int j = 0; j < s.length - i -1; ) {
+            for (int j = 0; j < s.length - i - 1; ) {
                 int next = j + 1;
-                swap(s, j, next);
+                prevGtNextThenSwap(s, j, next);
                 j = next;
             }
         }
     }
 
-    private void swap(int[] s, int prev, int next) {
-        if (s[prev] > s[next]) {
-            int temp = s[prev];
-            s[prev] = s[next];
-            s[next] = temp;
-        }
-    }
-    
 
     public static void main(String[] args) {
         new Bubble().testSort();
