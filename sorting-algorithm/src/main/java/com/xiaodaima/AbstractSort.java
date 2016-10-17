@@ -1,13 +1,25 @@
 package com.xiaodaima;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *  排序抽象， 添加一些输入和打印日志方法
  */
 public abstract class AbstractSort implements Sortable {
 
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractSort.class);
+
     public void testSort() {
         int[] a = ConsoleUtils.readLine();
-        sort(a);
+        int cycleCount = 100;
+        long start = System.nanoTime();
+        LOG.info("执行开始时间：" + start);
+        for(int i=0; i<cycleCount; i++) {
+            sort(a);
+        }
+        long end = System.nanoTime();
+        LOG.info("执行结束时间：" + end + "，耗时：" + (end - start)/cycleCount);
         ConsoleUtils.putOut(a);
     }
 
