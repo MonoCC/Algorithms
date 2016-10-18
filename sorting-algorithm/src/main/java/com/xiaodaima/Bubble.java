@@ -9,7 +9,7 @@ package com.xiaodaima;
 
 // 冒泡排序算法需要和选择排序算法区分开来
 // 冒泡是往上冒大的或者小的，或往前面冒大的或者小的。
-// 选择是从左向右选择大的或小的或从右向左选择大的或小的占位。
+// 选择是从左向右选择大的或小的或从右向左选择大的或小的依次占位。
 public class Bubble extends AbstractSort implements Sortable {
 
     @Override
@@ -35,5 +35,10 @@ public class Bubble extends AbstractSort implements Sortable {
 
     public static void main(String[] args) {
         new Bubble().testSort();
+    }
+
+    @Override
+    public String getName() {
+        return "冒泡（Bubble）";
     }
 }

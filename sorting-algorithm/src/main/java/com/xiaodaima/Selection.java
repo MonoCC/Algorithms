@@ -8,6 +8,12 @@ package com.xiaodaima;
 public class Selection extends AbstractSort implements Sortable {
 
     @Override
+    public String getName() {
+        return "选择（Selection）";
+    }
+
+
+    @Override
     /**
      * 优化选择排序方法，减少交换次数。
      * @param s

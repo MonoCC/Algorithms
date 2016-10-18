@@ -54,7 +54,7 @@ public class Insertion extends AbstractSort implements Sortable {
     }
 
     /**
-     * 优化，减少交换次数
+     * 优化，减少交换次数，空缺出需要暂用的位置。
      * @param s
      */
     public void sort1(int[] s) {
@@ -80,5 +80,10 @@ public class Insertion extends AbstractSort implements Sortable {
 
     public static void main(String[] args) {
         new Insertion().testSort();
+    }
+
+    @Override
+    public String getName() {
+        return "插入（Insertion）";
     }
 }

@@ -3,7 +3,7 @@ package com.xiaodaima;
 /**
  * 排序接口
  */
-public interface Sortable {
+public interface Sortable extends Nameable {
 
     //为什么不返回值，如果返回值，
     // 1. 让人误会，会返回新的数组
