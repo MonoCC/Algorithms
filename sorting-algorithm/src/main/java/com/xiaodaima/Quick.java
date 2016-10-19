@@ -2,6 +2,7 @@ package com.xiaodaima;
 
 import java.util.Arrays;
 import java.util.Stack;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * 快速排序
@@ -19,7 +20,6 @@ public class Quick extends AbstractSort implements Sortable {
         return "快速排序（Quick）";
     }
 
-    @Override
     public void sort(int[] s) {
         doSort(s, 0, s.length - 1);
     }
@@ -39,8 +39,7 @@ public class Quick extends AbstractSort implements Sortable {
      * @param end 不包含上次比较的基数位置
      * @return
      */
-    private int part1(int s[], int begin, int end) {
-
+    private int part(int s[], int begin, int end) {
         int basePos = begin;
         while(begin < end) {
             //尾部开始
@@ -64,7 +63,7 @@ public class Quick extends AbstractSort implements Sortable {
         return begin;
     }
 
-    private int part(int s[], int begin, int end) {
+    private int part1(int s[], int begin, int end) {
         int pivotPos = begin;
         int pivot = s[pivotPos];
         boolean endFind = true;
@@ -77,10 +76,11 @@ public class Quick extends AbstractSort implements Sortable {
                     endFind = false;
                 }
             } else {
-                if(pivot > s[begin]) {
+                if(pivot >= s[begin]) {
                     begin ++;
                 } else {
                     swap(s, begin, end);
+                    endFind = true;
                     end --;
                 }
             }
@@ -93,37 +93,29 @@ public class Quick extends AbstractSort implements Sortable {
 
 
     /**
-     * 非递归方法快速排序
+     * 非递归方法快速排序， port 分治排序是重复部分，那么不重复的就是区间。
+     * 所以用列表或者栈存入， 节省空间，使用栈
      * @param s
      */
-    public void sort1(int[] s) {
+    public void sort2(int[] s) {
         Stack<Integer> ss = new Stack<>();
         int begin = 0;
         int end = s.length - 1;
-        int pivot = s[begin];
-        int pivotPos = begin;
-        boolean endFind;
-        while(!ss.isEmpty() || ss.size() == s.length) {
-            endFind = true;
-            // 循环遍历找比pivot小的和大的数的位置
-            while(begin < end) {
-                if(endFind) {
-                    if(pivot < s[end]) {
-                        end --;
-                    } else {
-                        endFind = false;
-                    }
-                } else {
-                    if(pivot > s[begin]) {
-                        begin --;
-                    } else {
-                        swap(s, begin, end);
-                    }
-
-                }
+        ss.push(begin);
+        ss.push(end);
+        while(!ss.isEmpty()) {
+            end = ss.pop();
+            begin = ss.pop();
+            int pos = part1(s, begin, end);
+            int temPos = pos - 1;
+            if(temPos > begin) {
+                ss.push(begin);
+                ss.push(temPos);
             }
-            if(pivotPos != begin) {
-                swap(s, pivotPos, begin);
+            temPos = pos + 1;
+            if(end > temPos) {
+                ss.push(temPos);
+                ss.push(end);
             }
         }
     }
