@@ -1,5 +1,8 @@
 package com.xiaodaima;
 
+import java.util.Arrays;
+import java.util.Stack;
+
 /**
  * 快速排序
  * 思想：
@@ -36,7 +39,8 @@ public class Quick extends AbstractSort implements Sortable {
      * @param end 不包含上次比较的基数位置
      * @return
      */
-    private int part(int s[], int begin, int end) {
+    private int part1(int s[], int begin, int end) {
+
         int basePos = begin;
         while(begin < end) {
             //尾部开始
@@ -44,7 +48,7 @@ public class Quick extends AbstractSort implements Sortable {
                 end --;
             }
             //首部开始
-            while((begin < end) && (s[basePos] > s[begin])) {
+            while((begin < end) && (s[basePos] >= s[begin])) {
                 begin ++;
             }
             if(begin != end) {
@@ -56,12 +60,77 @@ public class Quick extends AbstractSort implements Sortable {
         }
         if(basePos != begin) {
             swap(s, basePos, begin);
-            return basePos;
         }
         return begin;
     }
 
+    private int part(int s[], int begin, int end) {
+        int pivotPos = begin;
+        int pivot = s[pivotPos];
+        boolean endFind = true;
+        // 循环遍历找比pivot小的和大的数的位置
+        while(begin < end) {
+            if(endFind) {
+                if(pivot < s[end]) {
+                    end --;
+                } else {
+                    endFind = false;
+                }
+            } else {
+                if(pivot > s[begin]) {
+                    begin ++;
+                } else {
+                    swap(s, begin, end);
+                    end --;
+                }
+            }
+        }
+        if(pivotPos != begin) {
+            swap(s, pivotPos, begin);
+        }
+        return begin;
+    }
+
+
+    /**
+     * 非递归方法快速排序
+     * @param s
+     */
+    public void sort1(int[] s) {
+        Stack<Integer> ss = new Stack<>();
+        int begin = 0;
+        int end = s.length - 1;
+        int pivot = s[begin];
+        int pivotPos = begin;
+        boolean endFind;
+        while(!ss.isEmpty() || ss.size() == s.length) {
+            endFind = true;
+            // 循环遍历找比pivot小的和大的数的位置
+            while(begin < end) {
+                if(endFind) {
+                    if(pivot < s[end]) {
+                        end --;
+                    } else {
+                        endFind = false;
+                    }
+                } else {
+                    if(pivot > s[begin]) {
+                        begin --;
+                    } else {
+                        swap(s, begin, end);
+                    }
+
+                }
+            }
+            if(pivotPos != begin) {
+                swap(s, pivotPos, begin);
+            }
+        }
+    }
+
+
+
     public static void main(String[] args) {
-        new Quick().testSort(1000);
+        new Quick().testSort();
     }
 }

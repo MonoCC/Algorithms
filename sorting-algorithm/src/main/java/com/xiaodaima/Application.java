@@ -9,18 +9,33 @@ import java.util.Random;
 public class Application {
 
     public static void main(String[] args) {
-        int capcity = 5000;
-        int cycle = 500;
+        int capcity = 50000;
         int[] a = new int[capcity];
         Random random = new Random();
         for(int i=0; i<capcity; i++) {
             a[i] = random.nextInt();
         }
-        new JdkSort().testSort(a, cycle, false);
-        new Insertion().testSort(a, cycle, false);
-        new Bubble().testSort(a, cycle, false);
-        new Quick().testSort(a, cycle, false);
-        new Selection().testSort(a, cycle, false);
+        int cycle = 5000;
+
+        for(int i=0; i<cycle; i++) {
+            System.out.println("======================================");
+            int[] toArray = Arrays.copyOf(a, a.length);
+            new JdkSort().testSort(toArray, false);
+
+            toArray = Arrays.copyOf(a, a.length);
+            new Insertion().testSort(toArray, false);
+
+            toArray = Arrays.copyOf(a, a.length);
+            new Bubble().testSort(toArray, false);
+
+            toArray = Arrays.copyOf(a, a.length);
+            new Quick().testSort(toArray, false);
+
+            toArray = Arrays.copyOf(a, a.length);
+            new Selection().testSort(toArray, false);
+        }
+
+
 
 
     }
