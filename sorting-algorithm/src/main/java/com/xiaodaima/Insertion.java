@@ -1,7 +1,5 @@
 package com.xiaodaima;
 
-import java.util.Arrays;
-
 /**
  * 插入排序
  * 基本思想：
@@ -28,11 +26,46 @@ public class Insertion extends AbstractSort implements Sortable {
 
     }
 
+    public void sort(int[] s) {
+        doSort1(s, 0, 1);
+    }
+
+    public static void doSort1(int[] s, int beginPos, int gap) {
+        for (int j = beginPos + gap; j < s.length; j += gap) {
+            int temp = s[j];
+            int k = 0;
+            for (k = j-gap; k >= beginPos && temp < s[k]; k -= gap) {
+                s[k + gap] = s[k];
+            }
+            s[k + gap] = temp;
+        }
+    }
+
+    public static void doSort(int[] s, int beginPos, int gap) {
+        for (int j = beginPos + gap; j < s.length; j += gap) {
+            int temp = s[j];
+            int pos = j;
+            for (int k = j-gap; k >= beginPos; k -= gap) {
+                if (temp < s[k]) {
+                    s[k + gap] = s[k];
+                    pos = k;
+                } else {
+                    s[k + gap] = temp;
+                    break;
+                }
+            }
+            if(pos == beginPos) {
+                s[pos] = temp;
+            }
+
+        }
+    }
+
     /**
      * 标志位置，最后统一交换
      * @param s
      */
-    public void sort(int[] s) {
+    public void sort4(int[] s) {
         for (int i = 1; i < s.length; i++) {
             int pos = i;
             //记住需要插入的位置

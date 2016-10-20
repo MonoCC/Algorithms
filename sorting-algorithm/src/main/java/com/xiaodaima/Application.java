@@ -26,6 +26,9 @@ public class Application {
             new Insertion().testSort(toArray, false);
 
             toArray = Arrays.copyOf(a, a.length);
+            new Shells().testSort(toArray, false);
+
+            toArray = Arrays.copyOf(a, a.length);
             new Bubble().testSort(toArray, false);
 
             toArray = Arrays.copyOf(a, a.length);
