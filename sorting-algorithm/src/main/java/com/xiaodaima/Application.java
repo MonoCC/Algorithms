@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Created by chongdi.yang on 2016/10/18.
+ * 排序时间比较
  */
 public class Application {
 
@@ -36,6 +36,9 @@ public class Application {
 
             toArray = Arrays.copyOf(a, a.length);
             new Selection().testSort(toArray, false);
+
+            toArray = Arrays.copyOf(a, a.length);
+            new Merge().testSort(toArray, false);
         }
 
 
