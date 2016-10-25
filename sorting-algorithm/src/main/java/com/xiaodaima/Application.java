@@ -39,6 +39,9 @@ public class Application {
 
             toArray = Arrays.copyOf(a, a.length);
             new Merge().testSort(toArray, false);
+
+            toArray = Arrays.copyOf(a, a.length);
+            new Heap().testSort(toArray, false);
         }
 
 
