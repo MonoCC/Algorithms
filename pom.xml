@@ -9,6 +9,7 @@
     <modules>
         <module>sorting-algorithm</module>
         <module>parent</module>
+        <module>search-algorithm</module>
     </modules>
     <packaging>pom</packaging>
 
